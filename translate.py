@@ -57,4 +57,4 @@ def main(inFile, outFile):
     return 0
 
 if __name__=='__main__':
-    main("E_gene.fasta", "E_prot.fasta")
+    main(inFile, outFile)
