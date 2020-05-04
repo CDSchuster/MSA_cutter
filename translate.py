@@ -1,8 +1,7 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-from Bio.Alphabet import Gapped, generic_dna, IUPAC
-import pandas as pd
+from Bio.Alphabet import IUPAC
 
 def loadFasta(fasFile):
     fasta=list(SeqIO.parse(fasFile, "fasta"))
@@ -58,4 +57,4 @@ def main(inFile, outFile):
     return 0
 
 if __name__=='__main__':
-    main(inFile, outFile)
+    main("E_gene.fasta", "E_prot.fasta")
