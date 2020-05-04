@@ -2,14 +2,13 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import Gapped, generic_dna, IUPAC
-#from Bio.Alphabet.IUPAC import *
 import pandas as pd
 
-print("Enter input:")
-filename=input()
-fasta=list(SeqIO.parse(filename, "fasta"))
+def loadFasta(fasFile):
+    fasta=list(SeqIO.parse(fasFile, "fasta"))
+    return fasta
 
-def translate(seq):
+def translate_seq(seq):
     seq=seq.upper()
     table = {
         'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -36,18 +35,27 @@ def translate(seq):
             codon = seq[i:i + 3]
             if codon[0] in nts and codon[1] in nts and codon[2] in nts:
                 protein+= table[codon]
-            else:
-                protein+="X"
+            else: protein+="X"
     return protein
 
-print("Enter output:")
-outFile=input()
+def translate_MSA(fasta):
+    records=[]
+    for rec in fasta:
+        name=rec.description.replace(" ", "")
+        aa=Seq(translate_seq(str(rec.seq)), IUPAC.protein)
+        newRec=SeqRecord(aa, id=name, description="")
+        records.append(newRec)
+    return records
 
-records=[]
-for rec in fasta:
-    name=rec.description.replace(" ", "")
-    aa=Seq(translate(str(rec.seq)), IUPAC.protein)
-    newRec=SeqRecord(aa, id=name, description="")
-    records.append(newRec)
+def writeFasta(records, outFile):
+    SeqIO.write(records, outFile, "fasta")
+    return 0
 
-SeqIO.write(records, outFile, "fasta")
+def main(inFile, outFile):
+    fasta=loadFasta(inFile)
+    records=translate_MSA(fasta)
+    writeFasta(records, outFile)
+    return 0
+
+if __name__=='__main__':
+    main(inFile, outFile)
