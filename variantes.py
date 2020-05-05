@@ -13,7 +13,7 @@ def countLetters(lista, divisor, no_letter, proportion_fiter):
 
 def variantes(file, type_file_prot, proportion_fiter):
 	
-	# Poner el nombre que se quiera
+	# Nombre del archivo de salida
 	salida_file=open("variantes_file.txt","w")
 
 	if type_file_prot:
@@ -54,8 +54,8 @@ def variantes(file, type_file_prot, proportion_fiter):
 
 	return 0
 
-# La funcion recibe, unarchivo de entrada(msa comun o ya cortado), 
+# La funcion recibe, un archivo de entrada(msa comun o ya cortado) 
 # Un termino booleano para ver si es de proteinas(True) o nucleotidos(False)
-# Filtro de proporcion de variantes. Solo se veran las variantes mayores a ese valor.
+# Filtro de proporcion de variantes. Solo se veran las variantes mayores a ese valor
 # Escribe un archivo de salida con los resultados
 variantes("/home/agustin/workspace/covid-19/msa_colum_extract/protein/S_prot.fasta",True,0.01)
