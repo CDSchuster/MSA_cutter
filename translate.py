@@ -3,7 +3,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import IUPAC
 
-class translator(object):
+class translate(object):
 
     def __init__(self, inFile, outFile):
         fasta=self.__loadFasta__(inFile)
