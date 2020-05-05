@@ -20,7 +20,7 @@ def getPosition(query_seq, ref):
             query_seq_index=query_seq_index+1
         elif ref[query_seq_index+i]==query_seq[query_seq_index]:
             query_seq_index=query_seq_index+1
-        if error>10 or query_seq_index==error:
+        if error>3 or query_seq_index==error:
             query_seq_index=0
             error=0
             i+=1
